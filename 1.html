@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>儿童节 PPT</title>
+  <style>
+    body {
+      margin: 0;
+      overflow: hidden;
+    }
+
+   .slide {
+      height: 100vh;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      text-align: center;
+      font-size: 32px;
+      color: #333;
+    }
+
+    #slide1 {
+      background-color: #ffd700;
+    }
+
+    #slide2 {
+      background-color: #98fb98;
+    }
+
+    #slide3 {
+      background-color: #ff69b4;
+    }
+  </style>
+</head>
+
+<body>
+  <div id="slide1" class="slide">儿童节快乐！</div>
+  <div id="slide2" class="slide">孩子们的笑容最灿烂。</div>
+  <div id="slide3" class="slide">一起度过欢乐的儿童节。</div>
+
+  <script>
+    let currentSlide = 0;
+    const slides = document.querySelectorAll('.slide');
+
+    document.addEventListener('touchstart', handleTouchStart);
+    document.addEventListener('touchmove', handleTouchMove);
+    document.addEventListener('touchend', handleTouchEnd);
+
+    let startY;
+    let endY;
+
+    function handleTouchStart(event) {
+      startY = event.touches[0].clientY;
+    }
+
+    function handleTouchMove(event) {
+      event.preventDefault();
+    }
+
+    function handleTouchEnd(event) {
+      endY = event.changedTouches[0].clientY;
+      if (endY > startY && currentSlide < slides.length - 1) {
+        currentSlide++;
+        scrollToSlide();
+      } else if (endY < startY && currentSlide > 0) {
+        currentSlide--;
+        scrollToSlide();
+      }
+    }
+
+    function scrollToSlide() {
+      document.documentElement.scrollTop = currentSlide * window.innerHeight;
+    }
+  </script>
+</body>
+
+</html>
